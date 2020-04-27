@@ -1,5 +1,12 @@
 # Potoo
 
+## What is it 
+Potoo is a special bird that communicates with VoIP ecosystem and particularly well with Wazo.
+
+The main objective of this project is to quickly (and perhaps badly) provide solutions to missing functionalities in a given ecosystem.
+
+Its best documentation is its source code and Potoo may be verry insecure.
+
 ## How to use potoo
 
 1. `apt-get install python3-venv`

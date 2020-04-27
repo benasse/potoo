@@ -8,7 +8,6 @@ def queue_show():
 
     if authorized_ip():
         queue = ''
-    
         try:
             queue = get_param('queue')
         except:
@@ -18,6 +17,7 @@ def queue_show():
     
         stdout = run_shell(cmd)
         html = stdout2html(stdout)
+
         return html
     else:
         return '401'
@@ -27,9 +27,7 @@ def queue_show():
 def queue_show_pretty():
 
     if authorized_ip():
-
         queue = ''
-    
         try:
             queue = get_param('queue')
         except:
