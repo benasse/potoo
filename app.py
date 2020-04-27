@@ -1,3 +1,5 @@
-from app import app
+from potoo import app
+import os
 
-app.run()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',port=8001)
