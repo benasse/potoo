@@ -1,7 +1,7 @@
 # Potoo
 
 ## What is it 
-Potoo is a special bird that communicates with VoIP ecosystem and particularly well with Wazo.
+[Potoo](https://en.wikipedia.org/wiki/Potoo) is a special bird that communicates with VoIP ecosystem and particularly well with Wazo.
 
 The main objective of this project is to quickly (and perhaps badly) provide solutions to missing functionalities in a given ecosystem.
 
