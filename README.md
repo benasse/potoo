@@ -1,7 +1,7 @@
 # Potoo
 
-## What is it 
-Potoo is a special bird that communicates with VoIP ecosystem and particularly well with Wazo.
+## What is it ?
+[Potoo](https://en.wikipedia.org/wiki/Potoo) is a special bird that communicates with VoIP ecosystem and particularly well with Wazo.
 
 The main objective of this project is to quickly (and perhaps badly) provide solutions to missing functionalities in a given ecosystem.
 
@@ -17,7 +17,7 @@ Potoo may be verry insecure use it at your own risk !
 4. `python3 -m venv venv`
 5. `source venv/bin/activate`
 6. `pip install -r requirements.txt`
-7. `flask run`
+7. `python app.py`
 
 ## Some interfaces
 
