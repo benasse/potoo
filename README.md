@@ -5,7 +5,9 @@ Potoo is a special bird that communicates with VoIP ecosystem and particularly w
 
 The main objective of this project is to quickly (and perhaps badly) provide solutions to missing functionalities in a given ecosystem.
 
-Its best documentation is its source code and Potoo may be verry insecure.
+Its best documentation is its source code but some example could be found bellow.
+
+Potoo may be verry insecure use it at your own risk !
 
 ## How to use potoo
 
@@ -16,3 +18,17 @@ Its best documentation is its source code and Potoo may be verry insecure.
 5. `source venv/bin/activate`
 6. `pip install -r requirements.txt`
 7. `flask run`
+
+## Some interfaces
+
+### Visualise queue from asterisk cli
+```
+http://myhost:8001/queue?queue=myqueue
+http://myhost:8001/queue_pretty?queue=myqueue # less information for less technical people
+http://myhost:8001/queue
+```
+### Originate a call with a GET http
+```
+http://myhost:8001/originate/v1?dest_exten=1234&dest_context=my-dest-context&src_exten=777&src_context=my-src-context
+http://myhost:8001/originate/v1?dest_exten=1234
+```
