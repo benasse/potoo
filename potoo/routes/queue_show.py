@@ -10,11 +10,11 @@ def queue_show():
         queue = ''
         try:
             queue = get_param('queue')
-        except:
+        except NameError:
             pass
-    
+
         cmd = '/usr/sbin/rasterisk -rx "queue show ' + queue + '"'
-    
+
         stdout = run_shell(cmd)
         html = stdout2html(stdout)
 
@@ -30,11 +30,12 @@ def queue_show_pretty():
         queue = ''
         try:
             queue = get_param('queue')
-        except:
+        except NameError:
             pass
-    
-        cmd = '/usr/sbin/rasterisk -rx "queue show ' + queue + '" | awk -F"(" \'{print $1$5$6}\' '
-    
+
+        cmd = '/usr/sbin/rasterisk -rx "queue show ' \
+              + queue + '" | awk -F"(" \'{print $1$5$6}\' '
+
         stdout = run_shell(cmd)
         html = stdout2html(stdout)
 
