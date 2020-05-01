@@ -24,10 +24,10 @@ def originatev1():
             pass
 
         try:
-            return '<pre>'
-        + run_originate(dest_context, dest_exten, src_context, src_exten)
-        + '</pre> dest_exten: ' + dest_exten + '<br> dest_context: '
-        + dest_context + '<br> src_exten: ' + src_exten
+            return '<pre>' \
+        + run_originate(dest_context, dest_exten, src_context, src_exten) \
+        + '</pre> dest_exten: ' + dest_exten + '<br> dest_context: ' \
+        + dest_context + '<br> src_exten: ' + src_exten \
         + '<br> src_context: ' + src_context
         except NameError:
             return 'all the params are not set'
