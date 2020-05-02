@@ -1,0 +1,9 @@
+---
+- name: Hello ansible
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - name: Print debug message
+    debug:
+      msg: "Hello ansible, this is my var: {{ sample_var }}"

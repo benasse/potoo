@@ -32,3 +32,9 @@ http://myhost:8001/queue
 http://myhost:8001/originate/v1?dest_exten=1234&dest_context=my-dest-context&src_exten=777&src_context=my-src-context
 http://myhost:8001/originate/v1?dest_exten=1234
 ```
+### Sample url
+```
+http://myhost:8001/hello_ansible # lanch a example playbook
+http://myhost:8001/hello_ansible_form # lanch a exampe playbook loading variable from a form
+
+```
