@@ -1,0 +1,8 @@
+name: potoo
+namespace: benasse
+version: 0.0.1
+description: This plugin adds more power to your Wazo
+plugin_format_version: 1
+depends:
+debian_depends:
+  - python3-venv
