@@ -5,3 +5,5 @@ author: Benoît Stahl
 display_name: Potoo 🦉
 description: ⚡️ This plugin adds more power to your engine 🔥
 homepage: https://github.com/benasse/potoo
+debian_depends:
+  - python3-venv
