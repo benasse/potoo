@@ -1,14 +1,26 @@
 #!/bin/sh
+# Copyright 2020 Benoît Stahl
+# SPDX-License-Identifier: GPL-3.0+
 
 case "$1" in
+    build)
+        exit 0
+        ;;
+
     package)
+        exit 0
         ;;
+
     install)
+        exit 0
         ;;
+
     uninstall)
+        exit 0
         ;;
+
     *)
         echo "$0 called with unknown argument '$1'" >&2
         exit 1
-        ;;
+    ;;
 esac
