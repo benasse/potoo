@@ -1,7 +1,7 @@
 name: potoo
-namespace: benasse
+namespace: sparrow
 version: 0.0.1
 author: Benoît Stahl
-display_name: potoo
-description: This plugin add more power to your Wazo
+display_name: Potoo 🦉
+description: ⚡️ This plugin adds more power to your Wazo 🔥
 homepage: https://github.com/benasse/potoo
