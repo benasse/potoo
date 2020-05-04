@@ -25,10 +25,10 @@ case "$1" in
 
     uninstall)
 	systemctl disable potoo
-	systemctl daemon-reload
 	rm -rf /lib/systemd/system/potoo.service
 	rm -rf /usr/local/bin/potoo
 	rm -rf /usr/local/bin/__pycache__
+	systemctl daemon-reload
         ;;
 
     *)
