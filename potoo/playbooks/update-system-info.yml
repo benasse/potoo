@@ -1,5 +1,7 @@
 ---
-- hosts: local
+- name: Update system info
+  hosts: 127.0.0.1
+  connection: local
 
   become: yes
 
@@ -11,7 +13,7 @@
   - name: keep only one one netiface
     become_user: postgres
     become: yes
-    shell: psql -d asterisk -U postgres -c "DELETE from netiface id > 1"
+    shell: psql -d asterisk -U postgres -c "DELETE from netiface WHERE id > 1"
     when: voip_iface is defined
 
   - name: set networktype = voip
@@ -33,7 +35,9 @@
     when: voip_address is defined
 
   - name: update wazo-provd ip address
-    script: change-voice-ip-provd.py {{ voip_address }}
+    script: script/change-voice-ip-provd.py {{ voip_address }}
+    args:
+      executable: /usr/bin/python3
     when: voip_address is defined
 
     # system information
@@ -116,6 +120,7 @@
     template:
       src: templates/60-mail-config.yml.j2
       dest: /etc/wazo-auth/conf.d/60-mail-config.yml
+    when: from_string is defined or smtp_origin is defined
 
   - name: create config using sysconfd
     shell: xivo-create-config

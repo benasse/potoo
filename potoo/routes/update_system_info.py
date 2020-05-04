@@ -14,9 +14,9 @@ class update_system_info_form(Form):
     canonical = TextField('canonical: ', validators=[validators.required()],
             description="asterisk no-reply@domain.tld\\n+root no-reply@domain.tld" )
     relayhost = TextField('relayhost: ', validators=[validators.required()],
-            description="smtp.domain.tld ( '' = none )" )
+            description="smtp.domain.tld ( null = none )" )
     fallback_relayhost = TextField('fallback_relayhost: ', validators=[validators.required()],
-            description="smtp2.domain.tld ( '' = none )" )
+            description="smtp2.domain.tld ( null = none )" )
     hostname = TextField('hostname:',
             validators=[validators.required()], description="my-machine" )
     mail_domain = TextField('mail_domain:', validators=[validators.required()],
@@ -24,9 +24,9 @@ class update_system_info_form(Form):
     nameserver1 = TextField('nameserver1: ', validators=[validators.required()],
             description="192.168.0.254" )
     nameserver2 = TextField('nameserver2: ', validators=[validators.required()],
-            description="192.168.0.253 ( '' = none )" )
+            description="192.168.0.253 ( null = none )" )
     nameserver3 = TextField('nameserver3: ', validators=[validators.required()],
-             description="192.168.0.252 ( '' = none )" )
+             description="192.168.0.252 ( null = none )" )
     voip_iface = TextField('voip_iface: ', validators=[validators.required()],
             description="ens224" )
     voip_address = TextField('voip_address: ', validators=[validators.required()],
@@ -34,16 +34,18 @@ class update_system_info_form(Form):
     
     @app.route("/update_system_info", methods=['GET', 'POST'])
     def update_system_info():
-        PLAYBOOK_FILE = os.path.join(os.getcwd(), "potoo/playbooks/hello_ansible_form.yml")
+        PLAYBOOK_FILE = os.path.join(os.getcwd(), "potoo/playbooks/update-system-info.yml")
         form = update_system_info_form(request.form)
     
         if request.method == 'POST':
-            smtp_origin=request.form['smtp_origin']
+            extravars = request.form.to_dict()
+            for item, value in extravars.items():
+                if value == 'null':
+                    extravars[item] = ''
     
         if form.validate():
-            extravars = {"sample_var": smtp_origin}
             r = ansible_runner.run(playbook=PLAYBOOK_FILE, extravars=extravars)
-            flash('Sample var: ' + smtp_origin)
+            flash('extravars: ' + str(extravars))
             flash("{}: {}".format(r.status, r.rc))
             flash(r.stats)
         else:
