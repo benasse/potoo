@@ -7,7 +7,7 @@ After=syslog.target network.target
 [Service]
 Type=idle
 Environment="PATH=/usr/local/bin/potoo/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-ExecStart=/usr/local/bin/potoo/venv/bin/gunicorn potoo:app --bind 0.0.0.0:8002 -t 90
+ExecStart=/usr/local/bin/potoo/venv/bin/gunicorn potoo:app --workers=4 --bind 0.0.0.0:8002 -t 90
 WorkingDirectory=/usr/local/bin
 
 [Install]
