@@ -13,11 +13,12 @@ case "$1" in
 	cp -R config.ini ${pkgdir}/etc/potoo/
 	mkdir -p ${pkgdir}/usr/local/bin
 	cp -R potoo ${pkgdir}/usr/local/bin/
+	cp -R reqirement.txt ${pkgdir}/usr/local/bin/potoo/
         ;;
 
     install)
 	/usr/bin/python3 -m venv /usr/local/bin/potoo/venv
-	/usr/local/bin/potoo/bin/pip install -r requirements.txt
+	/usr/local/bin/potoo/bin/pip install -r /usr/local/bin/potoo/requirements.txt
 	systemctl daemon-reload
 	systemctl enable potoo
         ;;
