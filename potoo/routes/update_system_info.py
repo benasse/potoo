@@ -15,7 +15,7 @@ class update_system_info_form(Form):
     domain = TextField('domain:', validators=[validators.required()],
             description="domain.tld" )
     canonical = TextField('canonical: ', validators=[validators.required()],
-            description="asterisk no-reply@domain.tld\\n+root no-reply@domain.tld" )
+            description="asterisk no-reply@domain.tld\\nroot no-reply@domain.tld" )
     relayhost = TextField('relayhost: ', validators=[validators.required()],
             description="smtp.domain.tld ( null = none )" )
     fallback_relayhost = TextField('fallback_relayhost: ', validators=[validators.required()],
