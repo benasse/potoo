@@ -80,11 +80,11 @@
     shell: psql -d asterisk -U postgres -c "UPDATE mail SET origin='{{ smtp_origin }}'"
     when: smtp_origin is defined
 
-  - name: update smtp origin for asterisk voicemail
+  - name: update voicemail src email for asterisk
     become_user: postgres
     become: yes
-    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ smtp_origin }}' where var_name='serveremail'"
-    when: smtp_origin is defined
+    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ voicemail_email }}' where var_name='serveremail'"
+    when: voicemail_email is defined
 
   - name: update from_string in sysconfd
     become_user: postgres
@@ -127,6 +127,9 @@
 
   - name: update config using sysconfd
     shell: xivo-update-config
+
+  - name: reload asterisk voicemail
+    shell: asterisk -rx 'voicemail reload'
 
   - name: restart wazo-auth
     service:

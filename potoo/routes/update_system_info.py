@@ -6,6 +6,8 @@ from potoo.utils import *
 
 class update_system_info_form(Form):
     smtp_origin = TextField('smtp_origin: ', validators=[validators.required()],
+            description="domain.tld" )
+    voicemail_mail = TextField('voicemail_mailn: ', validators=[validators.required()],
             description="no-reply@domain.tld" )
     from_string = TextField('from_string: ', validators=[validators.required()],
             description="Wazo PBX" )
