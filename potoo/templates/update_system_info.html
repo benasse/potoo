@@ -1,0 +1,59 @@
+<title>Update engine system info</title>
+
+<h1>Update engine system info</h1>
+<div>
+This page allows you to update the system information of your Wazo engine, be careful with the information you give it.
+</div>
+
+<div>
+Here is the output of the form: 
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+    <li>{{ message[1] }}</li>
+      {% endfor %}</ul>
+  {% endif %}
+{% endwith %}
+<form action="" method="post">
+{{ form.csrf }}
+
+<h2>voip info</h2>
+
+<div class="input text">
+{{ form.voip_iface.label }} {{ form.voip_iface }} {{ form.voip_iface.description }}</div>
+<div class="input text">
+{{ form.voip_address.label }} {{ form.voip_address }} {{ form.voip_address.description }}</div>
+
+
+<h2>system info</h2>
+<div class="input text">
+{{ form.hostname.label }} {{ form.hostname }} {{ form.hostname.description }}</div>
+<div class="input text">
+{{ form.domain.label }} {{ form.domain }} {{ form.domain.description }}</div>
+<div class="input text">
+{{ form.nameserver1.label }} {{ form.nameserver1 }} {{ form.nameserver1.description }}</div>
+<div class="input text">
+{{ form.nameserver2.label }} {{ form.nameserver2 }} {{ form.nameserver2.description }}</div>
+<div class="input text">
+{{ form.nameserver3.label }} {{ form.nameserver3 }} {{ form.nameserver3.description }}</div>
+
+<h2>mail info</h2>
+<div class="input text">
+{{ form.smtp_origin.label }} {{ form.smtp_origin }}  {{ form.smtp_origin.description }}</div>
+<div class="input text">
+{{ form.from_string.label }} {{ form.from_string }}  {{ form.from_string.description }}</div>
+<div class="input text">
+{{ form.mail_domain.label }} {{ form.mail_domain }} {{ form.mail_domain.description }}</div>
+<div class="input text">
+{{ form.canonical.label }} {{ form.canonical }} {{ form.canonical.description }}</div>
+<div class="input text">
+{{ form.relayhost.label }} {{ form.relayhost }} {{ form.relayhost.description }}</div>
+<div class="input text">
+{{ form.fallback_relayhost.label }} {{ form.fallback_relayhost }} {{ form.fallback_relayhost.description }}</div>
+
+<div class="input submit">
+<input type="submit" value="Submit"></div>
+</form>

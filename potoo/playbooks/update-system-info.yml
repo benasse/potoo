@@ -1,0 +1,132 @@
+---
+- hosts: local
+
+  become: yes
+
+  tasks:
+
+    # voip information
+
+    # use psql and not postgresql_query to keep backward compatibility with ansible v2.7 packaged in debian buster
+  - name: keep only one one netiface
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "DELETE from netiface id > 1"
+    when: voip_iface is defined
+
+  - name: set networktype = voip
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE netiface SET networktype='voip'"
+    when: voip_iface is defined
+
+  - name: update voip netiface
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE netiface SET ifname='{{ voip_iface }}'"
+    when: voip_iface is defined
+
+  - name: update voip ip
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE netiface SET address='{{ voip_address }}', gateway=''"
+    when: voip_address is defined
+
+  - name: update wazo-provd ip address
+    script: change-voice-ip-provd.py {{ voip_address }}
+    when: voip_address is defined
+
+    # system information
+
+  - name: update hostname
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE resolvconf SET hostname='{{ hostname }}'"
+    when: hostname is defined
+
+  - name: update domain
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE resolvconf SET domain='{{ domain }}'"
+    when: domain is defined
+
+  - name: update namesever1
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE resolvconf SET nameserver1='{{ nameserver1 }}'"
+    when: nameserver1 is defined
+
+  - name: update namesever2
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE resolvconf SET nameserver2='{{ nameserver2 }}'"
+    when: nameserver2 is defined
+
+  - name: update namesever3
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE resolvconf SET nameserver3='{{ nameserver3 }}'"
+    when: nameserver3 is defined
+
+    # mail information
+
+  - name: update smtp_origin in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE mail SET origin='{{ smtp_origin }}'"
+    when: smtp_origin is defined
+
+  - name: update smtp origin for asterisk voicemail
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ smtp_origin }}' where var_name='serveremail'"
+    when: smtp_origin is defined
+
+  - name: update from_string in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ from_string }}' where var_name= 'fromstring'"
+    when: from_string is defined
+
+  - name: update mail-domain in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE mail SET mydomain='{{ mail_domain }}'"
+    when: mail_domain is defined
+
+  - name: update canonical in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE mail SET canonical='{{ canonical }}'"
+    when: canonical is defined
+
+  - name: update relayhost in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE mail SET relayhost='{{ relayhost }}'"
+    when: relayhost is defined
+
+  - name: update fallback_relayhost in sysconfd
+    become_user: postgres
+    become: yes
+    shell: psql -d asterisk -U postgres -c "UPDATE mail SET fallback_relayhost='{{ fallback_relayhost }}'"
+    when: relayhost is defined
+
+  - name: configure wazo-auth email info
+    template:
+      src: templates/60-mail-config.yml.j2
+      dest: /etc/wazo-auth/conf.d/60-mail-config.yml
+
+  - name: create config using sysconfd
+    shell: xivo-create-config
+
+  - name: update config using sysconfd
+    shell: xivo-update-config
+
+  - name: restart wazo-auth
+    service:
+      name: wazo-auth
+      state: restarted
+    when: from_string is defined or smtp_origin is defined
+
+# TODO; add subnet to features acess to allow phonebook request
