@@ -8,7 +8,10 @@ import os
 
 def get_config():
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    try:
+        config.read('config.ini')
+    except:
+        config.read('/etc/potoo/config.ini')
     return config
 
 
