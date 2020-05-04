@@ -8,4 +8,3 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = config['flask']['SECRET_KEY']
 
 from potoo.routes import *
-

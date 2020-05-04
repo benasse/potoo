@@ -5,7 +5,7 @@ from potoo.utils import *
 @app.route("/hello_ansible")
 def hello_ansible():
 
-    PLAYBOOK_FILE = os.path.join(os.getcwd(), "playbooks/hello_ansible.yml")
+    PLAYBOOK_FILE = os.path.join(os.getcwd(), "potoo/playbooks/hello_ansible.yml")
 
     r = ansible_runner.run(playbook=PLAYBOOK_FILE, extravars={"my_var":"content"})
 

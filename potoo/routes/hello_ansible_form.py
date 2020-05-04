@@ -9,7 +9,7 @@ class helloAnsibleForm(Form):
     
     @app.route("/hello_ansible_form", methods=['GET', 'POST'])
     def hello():
-        PLAYBOOK_FILE = os.path.join(os.getcwd(), "playbooks/hello_ansible_form.yml")
+        PLAYBOOK_FILE = os.path.join(os.getcwd(), "potoo/playbooks/hello_ansible_form.yml")
         form = helloAnsibleForm(request.form)
     
         if request.method == 'POST':
