@@ -24,7 +24,7 @@ case "$1" in
 	systemctl disable potoo
 	systemctl daemon-reload
 	rm -rf /lib/systemd/system/potoo.service
-	rm /usr/local/bin/potoo
+	rm -rf /usr/local/bin/potoo
         ;;
 
     *)
