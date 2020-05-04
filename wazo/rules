@@ -4,19 +4,28 @@
 
 case "$1" in
     build)
-        exit 0
         ;;
 
     package)
+	mkdir -p ${pkgdir}/etc/potoo/
+	cp -R config.ini ${pkgdir}/etc/potoo/
+	cp -R potoo ${pkgdir}/usr/local/bin/
+	cp -R potoo.service /lib/systemd/system/
         exit 0
         ;;
 
     install)
         exit 0
+	systemctl daemon-reload
+	systemctl enable potoo
         ;;
 
     uninstall)
         exit 0
+	systemctl disable potoo
+	systemctl daemon-reload
+	rm -rf /lib/systemd/system/potoo.service
+	rm /usr/local/bin/potoo
         ;;
 
     *)
