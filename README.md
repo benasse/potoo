@@ -5,7 +5,7 @@
 
 The main objective of this project is to quickly (and perhaps badly) provide solutions to missing functionalities in a given ecosystem.
 
-Its best documentation is its source code but some example could be found bellow.
+Its best documentation is its source code but some example of use could be found bellow.
 
 Potoo may be verry insecure use it at your own risk !
 
