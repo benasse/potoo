@@ -13,7 +13,7 @@ case "$1" in
 	cp -R config.ini ${pkgdir}/etc/potoo/
 	mkdir -p ${pkgdir}/usr/local/bin
 	cp -R potoo ${pkgdir}/usr/local/bin/
-	cp -R reqirement.txt ${pkgdir}/usr/local/bin/potoo/
+	cp -R requirements.txt ${pkgdir}/usr/local/bin/potoo/
         ;;
 
     install)
