@@ -1,5 +1,3 @@
-# may be better from: https://stackoverflow.com/questions/37211115/how-to-enable-a-virtualenv-in-a-systemd-service-unit
-
 [Unit]
 Description=potoo service
 After=syslog.target network.target
