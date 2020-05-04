@@ -1,16 +1,17 @@
 from flask import request
 from subprocess import check_output
 from ansi2html import Ansi2HTMLConverter
+from os import path
 import ipaddress
 import configparser
-import os
 
 
 def get_config():
-    config = configparser.ConfigParser()
-    try:
+    if path.exists('config.ini'):
+        config = configparser.ConfigParser()
         config.read('config.ini')
-    except:
+    else:
+        config = configparser.ConfigParser()
         config.read('/etc/potoo/config.ini')
     return config
 
