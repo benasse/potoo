@@ -36,5 +36,8 @@ http://myhost:8001/originate/v1?dest_exten=1234
 ```
 http://myhost:8001/hello_ansible # lanch a example playbook
 http://myhost:8001/hello_ansible_form # lanch a exampe playbook loading variable from a form
-
+```
+### Update system informations
+```
+http://myhost:8001/update_system_info # form that permit to change system informations that are not availiable on admin interfaces
 ```
