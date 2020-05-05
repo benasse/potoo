@@ -4,6 +4,7 @@ from ansi2html import Ansi2HTMLConverter
 from os import path
 import ipaddress
 import configparser
+import psycopg2
 
 
 def get_config():
@@ -51,3 +52,30 @@ def run_shell(cmd):
 def stdout2html(stdout):
     conv = Ansi2HTMLConverter()
     return conv.convert(stdout)
+
+def simple_db_query(query):
+    config = get_config()
+ 
+    db_host = config['default']['db_host']
+    db_name = config['default']['db_name']
+    db_user = config['default']['db_user']
+    db_pass = config['default']['db_pass']
+
+    try:
+        conn = psycopg2.connect(host=db_host,database=db_name, user=db_user, password=db_pass)
+        cur = conn.cursor()
+        cur.execute(query)
+        result = cur.fetchone()
+        cur.close()
+        return result[0]
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+
+def none2null(string):
+    if string == '':
+        return 'null'
+    else:
+        return string

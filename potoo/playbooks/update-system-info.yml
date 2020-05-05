@@ -86,7 +86,7 @@
     shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ voicemail_email }}' where var_name='serveremail'"
     when: voicemail_email is defined
 
-  - name: update from_string in sysconfd
+  - name: update voicemail from_string for asterisk
     become_user: postgres
     become: yes
     shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ from_string }}' where var_name= 'fromstring'"
@@ -122,19 +122,22 @@
       dest: /etc/wazo-auth/conf.d/60-mail-config.yml
     when: from_string is defined or smtp_origin is defined
 
+    # apply config
+
   - name: create config using sysconfd
     shell: xivo-create-config
+    when: apply_config is defined
 
   - name: update config using sysconfd
-    shell: xivo-update-config
+    shell: xivo-update-config  
+    when: apply_config is defined
 
   - name: reload asterisk voicemail
     shell: asterisk -rx 'voicemail reload'
+    when: apply_config is defined
 
   - name: restart wazo-auth
     service:
       name: wazo-auth
       state: restarted
-    when: from_string is defined or smtp_origin is defined
-
-# TODO; add subnet to features acess to allow phonebook request
+    when: from_string is defined or smtp_origin is defined and apply_config is defined
