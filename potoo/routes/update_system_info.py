@@ -1,7 +1,7 @@
 import ansible_runner
 import os
 from flask import Flask, render_template, flash, request
-from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField, BooleanField
 from potoo import app
 from potoo.utils import *
 
@@ -34,6 +34,7 @@ class update_system_info_form(Form):
             description="ens224" )
     voip_address = TextField('voip_address: ', validators=[validators.required()],
             description="192.168.0.250" )
+    apply_config = BooleanField('Apply' )
     
     @app.route("/update_system_info", methods=['GET', 'POST'])
     def update_system_info():
