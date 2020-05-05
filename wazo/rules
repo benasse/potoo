@@ -21,9 +21,11 @@ case "$1" in
 	/usr/local/bin/potoo/venv/bin/pip install -r /usr/local/bin/potoo/requirements.txt
 	systemctl daemon-reload
 	systemctl enable potoo
+	systemctl start potoo
         ;;
 
     uninstall)
+        systemctl stop potoo
 	systemctl disable potoo
 	rm -rf /lib/systemd/system/potoo.service
 	rm -rf /usr/local/bin/potoo
