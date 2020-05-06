@@ -83,8 +83,8 @@
   - name: update voicemail src email for asterisk
     become_user: postgres
     become: yes
-    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ voicemail_email }}' where var_name='serveremail'"
-    when: voicemail_email is defined
+    shell: psql -d asterisk -U postgres -c "UPDATE staticvoicemail SET var_val='{{ from_email }}' where var_name='serveremail'"
+    when: from_email is defined
 
   - name: update voicemail from_string for asterisk
     become_user: postgres

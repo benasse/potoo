@@ -7,7 +7,7 @@ from potoo.utils import *
 
 
 current_smtp_origin = none2null(simple_db_query("SELECT origin FROM mail"))
-current_voicemail_email = none2null(simple_db_query("SELECT var_val from staticvoicemail WHERE var_name = 'serveremail'"))
+current_from_email = none2null(simple_db_query("SELECT var_val from staticvoicemail WHERE var_name = 'serveremail'"))
 current_from_string = none2null(simple_db_query("SELECT var_val from staticvoicemail WHERE var_name = 'fromstring'"))
 current_domain = none2null(simple_db_query("SELECT domain FROM resolvconf"))
 current_canonical = none2null(simple_db_query("SELECT canonical FROM mail"))
@@ -25,8 +25,8 @@ current_voip_address = none2null(simple_db_query("SELECT address FROM netiface")
 class update_system_info_form(Form):
     smtp_origin = TextField('smtp_origin: ', validators=[validators.required()],
             description="domain.tld", default=current_smtp_origin )
-    voicemail_email = TextField('voicemail_email: ', validators=[validators.required()],
-            description="no-reply@domain.tld", default=current_voicemail_email )
+    from_email = TextField('from_email: ', validators=[validators.required()],
+            description="no-reply@domain.tld", default=current_from_email )
     from_string = TextField('from_string: ', validators=[validators.required()],
             description="Wazo PBX", default=current_from_string )
     domain = TextField('domain:', validators=[validators.required()],
