@@ -120,6 +120,7 @@
     template:
       src: templates/60-mail-config.yml.j2
       dest: /etc/wazo-auth/conf.d/60-potoo-mail-config.yml
+      backup: yes
     when: from_string is defined or smtp_origin is defined
 
     # apply config
