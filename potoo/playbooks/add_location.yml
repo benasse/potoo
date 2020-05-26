@@ -1,0 +1,12 @@
+---
+- name: add
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - debug:
+      msg: "placeholder"
+
+  # TODO
+  # - add route to reach curent location
+  # - add dhcp file
