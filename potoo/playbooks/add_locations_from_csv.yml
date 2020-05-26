@@ -9,7 +9,7 @@
 
   # TODO
   # - loop over csv file using add_location.yml role
-  # - add route to reach sfr sbc ( when local location )
-  # - include dhcp_location files in dhcpd_extra.conf
+  # - add route to reach sfr sbc ( when default location and add-sfr-routes variable set ( by debault yes ) )
+  # - include dhcp_potoo_location files in dhcpd_extra.conf
   #
   # - add locations subnet in wazo-dird authorization
