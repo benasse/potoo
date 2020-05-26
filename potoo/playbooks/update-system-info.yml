@@ -119,7 +119,7 @@
   - name: configure wazo-auth email info
     template:
       src: templates/60-mail-config.yml.j2
-      dest: /etc/wazo-auth/conf.d/60-mail-config.yml
+      dest: /etc/wazo-auth/conf.d/60-potoo-mail-config.yml
     when: from_string is defined or smtp_origin is defined
 
     # apply config
