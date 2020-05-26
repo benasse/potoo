@@ -1,0 +1,18 @@
+---
+- name: Hello csv ansible
+  hosts: 127.0.0.1
+  connection: local
+
+  # Require ansible 2.9 you have to be in the potoo venv to use it:
+  # source /usr/local/bin/potoo/venv/bin/activate
+
+  tasks:
+  - name: "Reading voip locations information"
+    read_csv:
+      path: /usr/local/share/potoo/voip-locations.conf
+      key: location_name
+    register: locations
+
+  - debug:
+      msg: "{{ item.value }}"
+    loop: "{{ locations.dict|dict2items }}"

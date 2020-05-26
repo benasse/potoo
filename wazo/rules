@@ -19,6 +19,7 @@ case "$1" in
     install)
 	/usr/bin/python3 -m venv /usr/local/bin/potoo/venv
 	/usr/local/bin/potoo/venv/bin/pip install -r /usr/local/bin/potoo/requirements.txt
+	mkdir -p /usr/local/share/potoo/
 	systemctl daemon-reload
         ;;
 
