@@ -13,6 +13,8 @@ Potoo may be verry insecure use it at your own risk !
 1. `apt install -y wazo-plugind-cli`
 2. `wazo-plugind-cli -c 'install git https://github.com/benasse/potoo'`
 
+By default the service is stopped, it has to be started with `systemctl start potoo`
+
 ## Some interfaces
 
 ### Visualise queue from asterisk cli
