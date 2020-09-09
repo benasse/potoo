@@ -11,7 +11,8 @@ Potoo may be verry insecure use it at your own risk !
 
 ## Install potoo on Wazo engine
 1. `apt install -y wazo-plugind-cli`
-2. `wazo-plugind-cli -c 'install git https://github.com/benasse/potoo'`
+2. Edit the file `/etc/potoo/config.ini` with the networks allowed to access to the application, by filling in the following fields :`network_whitelist`
+3. `wazo-plugind-cli -c 'install git https://github.com/benasse/potoo'`
 
 By default the service is stopped, it has to be started with `systemctl start potoo`
 
