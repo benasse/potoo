@@ -14,7 +14,7 @@ Potoo may be verry insecure use it at your own risk !
 2. Edit the file `/etc/potoo/config.ini` with the networks allowed to access to the application, by filling the `network_whitelist` field.
 3. `wazo-plugind-cli -c 'install git https://github.com/benasse/potoo'`
 
-By default the service is stopped, it has to be started with `systemctl start potoo`
+By default the service is stopped, it has to be started with `systemctl start potoo`. It will run for 4 hours and then automatically stop.
 
 ## Some interfaces
 
