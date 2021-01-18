@@ -7,8 +7,6 @@ The main objective of this project is to quickly (and perhaps badly) provide sol
 
 Its best documentation is its source code but some example of use could be found bellow.
 
-Potoo may be verry insecure use it at your own risk !
-
 ## Install potoo on Wazo engine
 1. `apt install -y wazo-plugind-cli`
 2. Edit the file `/etc/potoo/config.ini` with the networks allowed to access to the application, by filling the `network_whitelist` field.
