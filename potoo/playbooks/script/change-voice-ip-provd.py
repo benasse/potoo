@@ -9,6 +9,7 @@ from wazo_auth_client import Client as AuthClient
 from xivo.chain_map import ChainMap
 from xivo.config_helper import read_config_file_hierarchy, parse_config_file
 from wazo_provd_client import Client as ProvdClient
+from wazo_confd_client import Client as ConfdClient
 
 logger = logging.getLogger('update_voip_ip_address')
 
@@ -53,48 +54,15 @@ raw_config['ntp_ip'] = ip
 raw_config['X_xivo_phonebook_ip'] = ip
 logger.info("Updating config...")
 config_manager.update(default_config)
- 
-logger.info("Fetching default provd config...")
-default_config = config_manager.get('default')
-
-logger.info("Updating provd ip")
-raw_config = default_config['raw_config']
-
-raw_config['ip'] = ip
-logger.info("Updating config...")
-config_manager.update(default_config)
-
-logger.info("Fetching default base config...")
-default_config = config_manager.get('base')
-
-logger.info("Updating phonebook ip")
-raw_config = default_config['raw_config']
-
-raw_config['ntp_ip'] = ip
-raw_config['X_xivo_phonebook_ip'] = ip
-logger.info("Updating config...")
-config_manager.update(default_config)
-
-logger.info("Fetching autoprov config...")
-default_config = config_manager.get('autoprov')
-
-logger.info("Updating autoprov config")
-raw_config = default_config['raw_config']
-
-raw_config['sccp_call_managers']['1']['ip'] = ip
-raw_config['sip_lines']['1']['proxy_ip'] = ip
-
-logger.info("Updating config...")
-config_manager.update(default_config)
-
-logger.info("Fetching registrar config...")
-default_config = config_manager.list_registrar()
-
-logger.info("Updating all proxy and registrar ip")
-for config in default_config['configs']:
-  config['registrar_main'] = ip
-  config['proxy_main'] = ip
-  config_manager.update(config)
-
 logger.info('Done.')
 
+logger.info("Connecting to confd..")
+
+confd_client = ConfdClient(token=token_data['token'], **config['confd'])
+registrars = confd_client.registrars.list()
+registrars['items'][0]['main_host'] = ip
+registrars['items'][0]['proxy_main_host'] = ip
+ 
+logger.info("Update registrar and reconfigure devices...")
+confd_client.registrars.update(registrars['items'][0])
+logger.info("Done.")
