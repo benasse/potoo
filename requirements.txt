@@ -8,7 +8,7 @@ docutils==0.16
 Flask==1.1.2
 gunicorn==20.0.4
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 lockfile==0.12.2
 MarkupSafe==1.1.1
 pexpect==4.8.0
