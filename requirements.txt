@@ -1,5 +1,5 @@
 ansi2html==1.5.2
-ansible==2.10.0
+ansible==2.10.7
 ansible-runner==1.4.6
 cffi==1.14.0
 click==7.1.1
